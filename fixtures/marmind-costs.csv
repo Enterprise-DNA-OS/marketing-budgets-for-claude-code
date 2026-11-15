@@ -1,0 +1,3 @@
+Reference,Name,Supplier,Currency,Planned,Committed,Forecast,Actual,Forecast date,Due date,Evidence,Custom note
+IMP-001,Design work,Paper Studio,NZD,1000.00,800.00,1100.00,300.00,2026-11-01,2026-12-01,Opening workbook,"Preserve this, too"
+IMP-002,Copy review,Studio South,NZD,500.00,400.00,500.00,0.00,2026-11-01,2026-12-02,Opening workbook,Second row

@@ -6,14 +6,17 @@
   "license": "MIT",
   "author": "Enterprise DNA (https://www.enterprisedna.co)",
   "repository": "github:Enterprise-DNA-OS/marketing-budgets-for-claude-code",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "migrate": "node scripts/migrate.mjs",
     "seed": "node scripts/seed.mjs",
-    "demo": "node scripts/migrate.mjs && node scripts/seed.mjs",
+    "demo": "node scripts/migrate.mjs && node scripts/seed.mjs && node scripts/budget.mjs budget-review && node scripts/budget.mjs reforecast-due && node scripts/budget.mjs commitments-due",
     "view": "node scripts/view.mjs",
     "docs": "node scripts/docs.mjs",
-    "test": "node scripts/smoke.mjs"
+    "test": "node scripts/smoke.mjs",
+    "budget": "node scripts/budget.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",

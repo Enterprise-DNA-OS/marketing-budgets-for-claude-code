@@ -22,9 +22,37 @@ Fill this in once. A worker with context knows. A worker without it guesses.
 
 | When the operator asks for... | Use this |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| /help | Read supported commands and flags. |
+| /budgets | Read budget periods and approved amounts. |
+| /campaigns | Read campaign owners, channels and allocations. |
+| /budget-review | Compare approved budgets, forecast spend and remaining headroom. |
+| /campaign-review | Review each campaign without combining currencies. |
+| /cost-review | Compare planned cost, commitments, actual spend and latest forecast. |
+| /commitments-due | Review outstanding commitments due within fourteen days. |
+| /reforecast-due | Find forecasts more than fourteen days old. |
+| /over-budget | Find campaigns projected above their allocation. |
+| /actions-due | Find overdue and next-week actions. |
+| /compliance | Review missing evidence, retention metadata and opening balances. |
+| /activity | Read the recorded change history. |
+| /campaign | Read one campaign with its costs and actions. |
+| /add-budget | Record an approved budget with evidence and retention dates. |
+| /add-campaign | Allocate a campaign inside a budget period. |
+| /add-cost | Record a planned cost and its total expected spend. |
+| /record-actual | Record an expense against a cost line. |
+| /void-actual | Void an incorrect expense with a reason and retain its history. |
+| /reforecast | Revise a cost line total forecast with a dated reason. |
+| /set-commitment | Record a changed purchase commitment with evidence. |
+| /log-action | Assign a review action and due date. |
+| /close-action | Record an action outcome. |
+| /review-records | Record retention dates and approval evidence. |
+| /import | Validate a mapped Marmind detail export and import it atomically. |
+| /export | Write all records and original imports to a private snapshot. |
+| /weekly-review | Draft Monday review from budgets, stale forecasts and actions. |
+| /draft-budget-review | Draft a branded budget brief without sending anything. |
+| /customise | Make a tested field or rule change. |
+| /new-view | Add a branded read-only report. |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+If an ask fits nothing here, run the CLI directly (`npm run budget -- help`) and then propose a new command for it.
 
 ## Hard rules
 
@@ -41,3 +69,7 @@ If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) an
 - `docs/` the thesis and the guide for moving off Marmind.
 
 Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/marmind
+
+## Budget semantics
+
+Forecast means the full expected cost, including spend already recorded. Projected spend is the greatest of actual spend, total commitment and total forecast. Never add those three figures. A paid invoice consumes the outstanding commitment. Currencies stay separate. Opening export actuals are aggregates, not invoice evidence. Void them with a reason when replacing them with checked invoices. All controls assume a trusted database owner; actor labels are not authentication.

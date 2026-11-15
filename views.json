@@ -1,13 +1,43 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Marketing Budgets for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Marketing budget week",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "budget-review",
+        "sql": "SELECT code,currency,approved_cents,allocated_cents,actual_cents,projected_cents,headroom_cents,unallocated_cents FROM budget_spend ORDER BY code"
+      },
+      {
+        "title": "reforecast-due",
+        "sql": "SELECT campaign,reference,owner,currency,projected_cents,forecast_on,forecast_age_days FROM line_spend WHERE forecast_age_days>14 ORDER BY forecast_on,campaign,reference"
+      },
+      {
+        "title": "actions-due",
+        "sql": "SELECT c.code campaign,a.id,a.note,a.owner,a.due_on FROM actions a JOIN campaigns c ON c.id=a.campaign_id WHERE a.closed_at IS NULL AND a.due_on<=current_date+7 ORDER BY a.due_on,c.code"
+      }
+    ]
+  },
+  {
+    "name": "commitments",
+    "title": "Commitments and campaign headroom",
+    "sections": [
+      {
+        "title": "campaign-review",
+        "sql": "SELECT code,owner,currency,allocation_cents,actual_cents,outstanding_cents,projected_cents,headroom_cents,stale_forecasts FROM campaign_spend ORDER BY code"
+      },
+      {
+        "title": "commitments-due",
+        "sql": "SELECT campaign,reference,supplier,owner,currency,outstanding_cents,due_on FROM line_spend WHERE outstanding_cents>0 AND due_on<=current_date+14 ORDER BY due_on,campaign,reference"
+      }
+    ]
+  },
+  {
+    "name": "evidence",
+    "title": "Evidence review",
+    "sections": [
+      {
+        "title": "Records needing review",
+        "sql": "SELECT * FROM compliance_issues ORDER BY rule,record"
       }
     ]
   }
